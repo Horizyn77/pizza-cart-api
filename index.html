@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Pizza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+    <h1>Perfect Pizza</h1>
+    <div class="cart" x-data="pizzaCart">
+        <div class="centeredCart" x-show="total > 0">
+            <div class="cart">
+                <h2>Your Cart</h2>
+                <p x-text="paymentMessage" :class="msgStyle ? 'errorStyle' : 'successStyle'"></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Flavour</th>
+                            <th>Size</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <template x-for="pizza in cartPizzas">
+                        <tr>
+                            <td x-text="pizza.flavour"></td>
+                            <td x-text="pizza.size"></td>
+                            <td>R <span x-text="pizza.price"></span></td>
+                            <td>
+                                <button @click="addPizzaToCart(pizza.id)">+</button>
+                                <span x-text="pizza.qty" id="quantity"></span>
+                                <button @click="removePizzaFromCart(pizza.id)" id="removeBtn">-</button>
+                            </td>
+                            <td>R <span x-text="pizza.total.toFixed(2)"></span></td>
+                        </tr>
+                    </template>
+
+
+                    <tr>
+                        <td colspan="3">Total</td>
+                        <td colspan="2" style="text-align:right;">R <span x-text="total.toFixed(2)"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Pay now</td>
+                        <td class="flexInput"><input type="text" x-model="paymentAmount" id="payInput"></td>
+                        <td><button @click="payForCart" id="payBtn">Pay</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h2 id="featuredHeading">Featured Pizzas</h2>
+        <div class="pizzas">
+            <div class="pizza small_pizza featured">
+                <h2 x-text="featuredPizzas[0].flavour"></h2>
+                <img src="images/pizza-one.png" alt="" width="125">
+                <h3 >R <span x-text="featuredPizzas[0].price"></span></h3>
+                <p>Chicken, mushroom, sweet bell pepper, onion, Tikka sauce, spring onion</p>
+                <div class="flexBuyBtns">
+                    <button class="buyBtn" @click="addPizzaToCart(featuredPizzas[0].id)">Buy</button>
+                </div>
+            </div>
+            <div class="pizza medium_pizza featured">
+                <h2 x-text="featuredPizzas[1].flavour"></h2>
+                <img src="images/pizza-two.png" alt="" width="125">
+                <h3 >R <span x-text="featuredPizzas[1].price"></span></h3>
+                <p>Ground beef, green chilli, green pepper, onion, Mexican sauce</p>
+                <div class="flexBuyBtns">
+                    <button class="buyBtn" @click="addPizzaToCart(featuredPizzas[1].id)">Buy</button>
+                </div>
+            </div>
+            <div class="pizza large_pizza featured">
+                <h2 x-text="featuredPizzas[2].flavour"></h2>
+                <img src="images/pizza-three.png" alt="" width="125">
+                <h3 >R <span x-text="featuredPizzas[2].price"></span></h3>
+                <p>Chicken, green pepper, pineapple, sweet & sour sauce</p>
+                <div class="flexBuyBtns">
+                    <button class="buyBtn" @click="addPizzaToCart(featuredPizzas[2].id)">Buy</button>
+                </div>
+            </div>
+        </div>
+        <template x-for="pizza in pizzas">
+            <div class="centeredPizza">
+                <div class="pizzaItem">
+                    <div id="item-1">
+                        <img src="images/pizza-list.png" alt="" srcset="">
+                    </div>
+                    <div id="item-2">
+                        <p x-text="pizza.flavour"></p>
+                        <p x-text="pizza.size"></p>
+                    </div>
+                    <div id="item-3">
+                        <p >R <span x-text="pizza.price"></span></p>
+                    </div>
+                    <div id="item-4">
+                        <button @click="addPizzaToCart(pizza.id)">Buy</button>
+                    </div>
+                    <div id="item-5">
+                        <button @click="addToFeaturedList(pizza.id)">Add To Featured</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="pizza contact_us">
+        <h2>Contact details</h2>
+        Contact us at: 011 636 7373 / info@perfectpizza.co.za
+        <script src="main.js"></script>
+</body>
+
+</html>
