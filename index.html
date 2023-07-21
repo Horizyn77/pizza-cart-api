@@ -44,8 +44,6 @@
                             <td>R <span x-text="pizza.total.toFixed(2)"></span></td>
                         </tr>
                     </template>
-
-
                     <tr>
                         <td colspan="3">Total</td>
                         <td colspan="2" style="text-align:right;">R <span x-text="total.toFixed(2)"></span></td>
@@ -64,7 +62,7 @@
             <div class="pizza small_pizza featured">
                 <h2 x-text="featuredPizzas[0].flavour"></h2>
                 <img src="images/pizza-one.png" alt="" width="125">
-                <h3 >R <span x-text="featuredPizzas[0].price"></span></h3>
+                <h3>R <span x-text="featuredPizzas[0].price"></span></h3>
                 <p>Chicken, mushroom, sweet bell pepper, onion, Tikka sauce, spring onion</p>
                 <div class="flexBuyBtns">
                     <button class="buyBtn" @click="addPizzaToCart(featuredPizzas[0].id)">Buy</button>
@@ -73,7 +71,7 @@
             <div class="pizza medium_pizza featured">
                 <h2 x-text="featuredPizzas[1].flavour"></h2>
                 <img src="images/pizza-two.png" alt="" width="125">
-                <h3 >R <span x-text="featuredPizzas[1].price"></span></h3>
+                <h3>R <span x-text="featuredPizzas[1].price"></span></h3>
                 <p>Ground beef, green chilli, green pepper, onion, Mexican sauce</p>
                 <div class="flexBuyBtns">
                     <button class="buyBtn" @click="addPizzaToCart(featuredPizzas[1].id)">Buy</button>
@@ -82,7 +80,7 @@
             <div class="pizza large_pizza featured">
                 <h2 x-text="featuredPizzas[2].flavour"></h2>
                 <img src="images/pizza-three.png" alt="" width="125">
-                <h3 >R <span x-text="featuredPizzas[2].price"></span></h3>
+                <h3>R <span x-text="featuredPizzas[2].price"></span></h3>
                 <p>Chicken, green pepper, pineapple, sweet & sour sauce</p>
                 <div class="flexBuyBtns">
                     <button class="buyBtn" @click="addPizzaToCart(featuredPizzas[2].id)">Buy</button>
@@ -100,7 +98,7 @@
                         <p x-text="pizza.size"></p>
                     </div>
                     <div id="item-3">
-                        <p >R <span x-text="pizza.price"></span></p>
+                        <p>R <span x-text="pizza.price"></span></p>
                     </div>
                     <div id="item-4">
                         <button @click="addPizzaToCart(pizza.id)">Buy</button>
@@ -114,7 +112,7 @@
     </div>
     <div class="pizza contact_us">
         <h2>Contact details</h2>
-        Contact us at: 011 636 7373 / info@perfectpizza.co.za
+        <p>Contact us at: 011 636 7373 / info@perfectpizza.co.za</p>
         <script src="main.js"></script>
 </body>
 
