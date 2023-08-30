@@ -15,8 +15,55 @@
 </head>
 
 <body>
-    <h1>Perfect Pizza</h1>
     <div class="cart" x-data="pizzaCart">
+        <div class="flexHeading">
+            <h1>Perfect Pizza</h1>
+            <h3 @click="historicalOrders" x-text="showHistoricalOrders ? 'Hide Historical Orders' : 'View Historical Orders'">View Historical Orders</h3>
+        </div>
+        <div class="centeredHistorical">
+            <div x-show="showHistoricalOrders">
+                <h2>Historical Orders</h2>
+                <template x-for="order in historicalOrdersList">
+                    <div class="historicalTable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="3" style="text-align: left;">Cart ID</th>
+                                    <td colspan="2" style="text-align: center;" x-text="order.cart_code"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">Status</td>
+                                    <td colspan="2" style="text-align: center;">Paid</td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: left;">Flavour</th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                </tr>
+                                <template x-for="pizza in order.pizzas">
+                                    <tr>
+                                        <td x-text="pizza.flavour"></td>
+                                        <td x-text="pizza.size"></td>
+                                        <td>R <span x-text="pizza.price"></span></td>
+                                        <td x-text="pizza.qty" style="text-align: center;"></td>
+                                        <td >R <span x-text="pizza.total.toFixed(2)"></span></td>
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td colspan="3">Total</td>
+                                    <td colspan="2" style="text-align: center;">R <span x-text="order.total.toFixed(2)"></span></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+            </div>
+        </div>
         <div class="centeredCart" x-show="total > 0">
             <div class="cart">
                 <h2>Your Cart</h2>
@@ -37,9 +84,9 @@
                             <td x-text="pizza.size"></td>
                             <td>R <span x-text="pizza.price"></span></td>
                             <td>
-                                <button @click="addPizzaToCart(pizza.id)">+</button>
-                                <span x-text="pizza.qty" id="quantity"></span>
                                 <button @click="removePizzaFromCart(pizza.id)" id="removeBtn">-</button>
+                                <span x-text="pizza.qty" id="quantity"></span>
+                                <button @click="addPizzaToCart(pizza.id)">+</button>
                             </td>
                             <td>R <span x-text="pizza.total.toFixed(2)"></span></td>
                         </tr>

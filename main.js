@@ -9,7 +9,13 @@ function PizzaCart() {
         paymentMessage: "",
         msgStyle: "",
         featuredPizzas: [],
+        showHistoricalOrders: false,
+        historicalOrderIds: [],
+        historicalOrdersList: [],
         init() {
+
+            this.getFeaturedList();
+
             const url = "https://pizza-api.projectcodex.net/api/pizzas";
 
             axios.get(url)
@@ -18,7 +24,6 @@ function PizzaCart() {
                 })
 
             this.createCart();
-            this.getFeaturedList();
 
         },
         createCart() {
@@ -114,13 +119,34 @@ function PizzaCart() {
             })
         },
         getFeaturedList() {
-            
+
             const url = `https://pizza-api.projectcodex.net/api/pizzas/featured?username=${this.username}`
 
-            axios.get(url).then((result) => {
+            axios.get(url).then(result => {
                 this.featuredPizzas = result.data.pizzas;
             })
+        },
+        historicalOrders() {
+            
+            if (!this.showHistoricalOrders) {
+                this.showHistoricalOrders = true;
+            } else {
+                this.showHistoricalOrders = false;
+            }
+            axios.get(`https://pizza-api.projectcodex.net/api/pizza-cart/username/${this.username}`)
+                .then(result => {
+                    const paidOrders = result.data.filter(item => item.status == "paid")
+                    this.historicalOrderIds = paidOrders.map(item => item.cart_code)
+                    this.getHistoricalOrders()
+                })
+        },
+        getHistoricalOrders() {
+            this.historicalOrderIds.forEach(item => {
+                axios.get(`https://pizza-api.projectcodex.net/api/pizza-cart/${item}/get`)
+                    .then(result => this.historicalOrdersList.push(result.data))
+            })
         }
+
     }
 }
 

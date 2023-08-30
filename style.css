@@ -215,6 +215,35 @@ button {
     width: 21px;
 }
 
+.flexHeading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexHeading h3 {
+    font-family: 'Roboto', sans-serif;
+    margin-right: 14px;
+    padding-top: 14px;
+}
+
+.flexHeading h3:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.centeredHistorical {
+    display: flex;
+    justify-content: center;
+}
+
+.historicalTable {
+    margin-bottom: 20px;
+}
+
+.historicalTable table {
+    min-width: 500px;
+}
+
 @media (min-width: 960px) {
     .pizzas {
         display: flex;
@@ -224,5 +253,32 @@ button {
     .medium_pizza,
     .large_pizza {
         flex: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .pizzaItem{
+        display: block;
+        width: 100%;
+    }
+
+    .pizzaItem {
+        text-align: center;
+    }
+
+    #item-4 {
+        margin-bottom: 10px;
+    }
+
+    #item-4 button {
+        width: 80%;
+    }
+
+    #item-5 button {
+        width: 80%;
+    }
+
+    .flexBuyBtns button{
+        width: 80%;
     }
 }
