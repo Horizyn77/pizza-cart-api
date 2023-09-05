@@ -85,7 +85,7 @@ function PizzaCart() {
             this.pay().then(result => {
 
                 if (result.data.status == "failure") {
-                    this.paymentMessage = result.data.message;
+                    this.paymentMessage = `${result.data.message} Not enough money to make payment`;
                     this.msgStyle = true;
 
                     setTimeout(() => {

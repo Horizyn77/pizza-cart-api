@@ -281,4 +281,12 @@ button {
     .flexBuyBtns button{
         width: 80%;
     }
+    .flexHeading {
+        display: block;
+    }
+
+    .flexHeading h3 {
+        margin-left: 20px;
+        margin-bottom: 0;
+    }
 }
